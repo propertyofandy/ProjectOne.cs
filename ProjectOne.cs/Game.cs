@@ -18,29 +18,57 @@ namespace ProjectOne.cs
            
         }
 
-        public static bool PlayGame(int lives, string hidden)
+        public static bool PlayGame( int lives, string hidden)
         {
+            lives = 3; 
             int numGeuss = 0;
             string[] secret = new string[hidden.Length];
+            
             bool gameWon = false;
             LetterSpots(hidden, secret, numGeuss);
+            GettingStarted();
             while (gameWon == false)
             {
+                string lifeCheck = "";
+                for (int i = 0; i < hidden.Length; i++)
+                {
+                    lifeCheck = lifeCheck + secret[i];
+                }
+                string lifeCheck2 = lifeCheck;
+                numGeuss = 1;
                 
-                Console.Write("guess a letter");
-                string guess = Console.ReadLine();
-                Console.WriteLine(guess);
-                secret = GuessChecker(guess,hidden, secret);
+                secret = GuessChecker(hidden, secret);
                 LetterSpots(hidden, secret, numGeuss);
+
+                lifeCheck = "";
+                for (int i = 0; i < hidden.Length; i++)
+                {
+                    lifeCheck = lifeCheck + secret[i];
+                }
+
+                if(lifeCheck == lifeCheck2)
+                {
+                    lives--;
+                    Console.WriteLine($"you have {lives} remaining");
+                
+                }
+
                 if (DidYaWin(hidden, secret) == true)
                 {
                     gameWon = true;
                 }
 
-
+                if(lives == 0)
+                {
+                    Console.WriteLine("game over");
+                    gameWon = true;
+                }
                 numGeuss++;
             }
-
+            if (lives != 0)
+            {
+                Console.WriteLine("you won");
+            }
 
             return true;
 
@@ -49,19 +77,20 @@ namespace ProjectOne.cs
 
         public static bool DidYaWin(string hidden,string[] secret)
         {
-            Console.Write("secrete == " + secret[0]);
+            
             string checking = "";
             for (int i = 0; i < hidden.Length; i++)
             {
-                //string p = secret[0]; 
-                
+
                 checking = checking + secret[i];
 
             }
+
             if (checking == hidden)
             {
                 return true;
             }
+
             else
             {
                 return false;
@@ -71,53 +100,77 @@ namespace ProjectOne.cs
 
         public static void LetterSpots(string hidden, string[] secret, int numGuess)
         {
+          
             if (numGuess == 0) // if num guess == 0 then do this <<<<<<<<
             {
                 Console.Write("\t\t");
                 for (int i = 0; i < hidden.Length; i++)
                 {
-                    secret[i] = "_ "; 
-                    Console.Write("_ ");
+                    secret[i] = "_"; 
+                    Console.Write(secret[i]+" ");
                 }
             }
             else
             {
-                Console.Write("\t\t");
+                Console.WriteLine("\t\t");
                 for (int j = 0; j < hidden.Length; j++)
                 {
                     Console.Write(secret[j] + " ");
                 }
             }
             Console.WriteLine();
+           
         }
         
-        public  static  string[] GuessChecker(string guess, string hidden, string[] secret) 
+        public  static  string[] GuessChecker(string hidden, string[] secret) 
         {
-            Console.WriteLine(hidden);
             
-            for (int i = 0; i < hidden.Length; i++)
+            Console.Write("\t\tguess a letter:\t");
+            string guess = Console.ReadLine();
+            Console.WriteLine(guess);
+
+            if (guess.Length != 1)
             {
-                if (guess[0] == hidden[i])
-                {
-                    secret[i] = guess;
-                    
-                }
-                
-                
-                
+                Console.WriteLine("guess a letter meaning one");
+                GuessChecker(hidden, secret);
             }
+
+            if (guess[0] >= 'a' && guess[0] <= 'z' || guess[0] >= 'A' && guess[0] <= 'Z')
+            {
+
+                for (int i = 0; i < hidden.Length; i++)
+                {
+                        int wrongGuess = 0;
+                        if (guess[0] == hidden[i])
+                        {
+                            secret[i] = guess;
+                            wrongGuess++;
+
+                        }
+                }
+            }
+            else
+            {
+                Console.WriteLine("are you sure you now what letters are?");
+                    GuessChecker(hidden, secret);
+             }
+            
+            
             return secret;
 
 
         }
-        public void GettingStarted()
+        public static void GettingStarted()
         {
-            // print what game is, game rules, ect 
+            Console.WriteLine("\n");
+            Console.WriteLine("the game we are going to play is called \"Guess the String\"");
+            Console.WriteLine("and no it is not hang man... the rules are");
+            Console.WriteLine("guess a letter if you guess right you will be shown a clue");
+            Console.WriteLine("guess incorectly and you will be eliminated");
+            Console.WriteLine("Ps. you already agreed to play and are legally obligated to continue.\n");
 
         }
 
-
-
     }
-    // >=a && <=z <<<<<<<< add later in guesschecker. 
+
 }

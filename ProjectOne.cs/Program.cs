@@ -16,10 +16,20 @@ namespace ProjectOne.cs
         {
             bool runGame = true;
             int lives = 3;
-            string hidden;
+           
+
+            StreamReader readingSize = new StreamReader("file1.txt");
+            int j = 0;
+            while(readingSize.ReadLine()!= null)
+            {
+                j++;
+            }
+            readingSize.Close();
+
+
 
             Random random = new Random();
-            string[] randomWord = new string[10];
+            string[] randomWord = new string[j];
 
             StreamReader reading = new StreamReader("file1.txt");
 
@@ -29,26 +39,26 @@ namespace ProjectOne.cs
             }
             reading.Close();
 
-            int n = random.Next(10);
-            Console.WriteLine(n);
+  
             
             while (runGame == true)
             {
-                Console.WriteLine("would you like to play a game");
+                int n = random.Next(j);
+                Console.WriteLine("\t\twould you like to play a game \n\t\tyes or no:\t");
+                string answer = Console.ReadLine();
 
-                if (Console.ReadLine() == "n")
+                if (answer.ToLower() == "no")
                 {
                     break;
                 }
-
-                // move random numbers here so string changes when you start new game.
-                Game game1 = new Game(lives, randomWord[n]);
-                if(Game.PlayGame(lives, randomWord[n])== true)
+                else if (answer.ToLower() == "yes")
                 {
-                    Console.WriteLine("you won");
+                    
+                    // move random numbers here so string changes when you start new game.
+                    Game game1 = new Game(lives, randomWord[n]);
+                    Game.PlayGame(lives, randomWord[n]);
+
                 }
-              
-                
 
 
             }
