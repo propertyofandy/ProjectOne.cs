@@ -60,7 +60,7 @@ namespace ProjectOne.cs
 
                 if(lives == 0)
                 {
-                    Console.WriteLine("game over");
+                    Console.WriteLine("game over the word was " + hidden);
                     gameWon = true;
                 }
                 numGeuss++;
@@ -78,20 +78,20 @@ namespace ProjectOne.cs
         public static bool DidYaWin(string hidden,string[] secret)
         {
             
-            string checking = "";
-            for (int i = 0; i < hidden.Length; i++)
+            string checking = ""; 
+            for (int i = 0; i < hidden.Length; i++) // turns array into a string called checking
             {
 
                 checking = checking + secret[i];
 
             }
 
-            if (checking == hidden)
+            if (checking == hidden) // if matches return true you won
             {
                 return true;
             }
 
-            else
+            else // otherwise you did not win yet
             {
                 return false;
             }
@@ -101,7 +101,7 @@ namespace ProjectOne.cs
         public static void LetterSpots(string hidden, string[] secret, int numGuess)
         {
           
-            if (numGuess == 0) // if num guess == 0 then do this <<<<<<<<
+            if (numGuess == 0) // the first instances inputs _ array and prints during first instance
             {
                 Console.Write("\t\t");
                 for (int i = 0; i < hidden.Length; i++)
@@ -110,7 +110,7 @@ namespace ProjectOne.cs
                     Console.Write(secret[i]+" ");
                 }
             }
-            else
+            else // if not first instance prints each element of the array
             {
                 Console.WriteLine("\t\t");
                 for (int j = 0; j < hidden.Length; j++)
@@ -129,15 +129,18 @@ namespace ProjectOne.cs
             string guess = Console.ReadLine();
             Console.WriteLine(guess);
 
-            if (guess.Length != 1)
+            while (guess.Length != 1)// checks if the gues is a single letter if not try again
             {
+                Console.Write("\t\tguess a letter:\t");
+                guess = Console.ReadLine();
+                Console.WriteLine(guess);
                 Console.WriteLine("guess a letter meaning one");
-                GuessChecker(hidden, secret);
+                
             }
-
+            // checks if char is alphabetical
             if (guess[0] >= 'a' && guess[0] <= 'z' || guess[0] >= 'A' && guess[0] <= 'Z')
             {
-
+                // if so put guess value into correct spot in array 
                 for (int i = 0; i < hidden.Length; i++)
                 {
                         int wrongGuess = 0;
@@ -149,7 +152,7 @@ namespace ProjectOne.cs
                         }
                 }
             }
-            else
+            else //otherwise recall method
             {
                 Console.WriteLine("are you sure you now what letters are?");
                     GuessChecker(hidden, secret);
@@ -160,7 +163,7 @@ namespace ProjectOne.cs
 
 
         }
-        public static void GettingStarted()
+        public static void GettingStarted() // souly to display game rules at the start of game. 
         {
             Console.WriteLine("\n");
             Console.WriteLine("the game we are going to play is called \"Guess the String\"");

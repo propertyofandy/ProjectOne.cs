@@ -16,9 +16,9 @@ namespace ProjectOne.cs
         {
             bool runGame = true;
             int lives = 3;
-           
 
-            StreamReader readingSize = new StreamReader("file1.txt");
+            // reads each line to gather amount of words there are
+            StreamReader readingSize = new StreamReader("file1.txt"); 
             int j = 0;
             while(readingSize.ReadLine()!= null)
             {
@@ -28,11 +28,11 @@ namespace ProjectOne.cs
 
 
 
-            Random random = new Random();
-            string[] randomWord = new string[j];
+            Random random = new Random();// initializing random 
+            string[] randomWord = new string[j]; // initailizing array
 
+            // inputing each word from text file into array 
             StreamReader reading = new StreamReader("file1.txt");
-
             for (int i = 0; i < 10; i++)
             {
                 randomWord[i] = reading.ReadLine(); 
@@ -43,7 +43,9 @@ namespace ProjectOne.cs
             
             while (runGame == true)
             {
-                int n = random.Next(j);
+                int n = random.Next(j-1); // uses amount of words gathered to determine next random
+                Console.WriteLine(n);
+                // console output/input for playing game
                 Console.WriteLine("\t\twould you like to play a game \n\t\tyes or no:\t");
                 string answer = Console.ReadLine();
 
@@ -53,12 +55,11 @@ namespace ProjectOne.cs
                 }
                 else if (answer.ToLower() == "yes")
                 {
-                    
-                    // move random numbers here so string changes when you start new game.
-                    Game game1 = new Game(lives, randomWord[n]);
+                    // sends data to PlayGame method in Game 
                     Game.PlayGame(lives, randomWord[n]);
 
                 }
+                
 
 
             }
@@ -71,7 +72,4 @@ namespace ProjectOne.cs
 
     }
 }
-// NEED TO DO: 1) create and implament Getting started method  >>>>>  2) move Random() num so string changes when new game begins >>>>>>
-// >>>>>>>>> 3) desperatly need to make the visual elements look nice  >>>>>> 4) need to add function when user inputs more than 1 char to restart pick a number.
-// >>>>>>> 5) also function needs to make sure the char input is a letter not num or other (&*%^$#). num guess = 0 causes error if you gaues first case corectly 
-// >>>>>>> 6) since time will most lickely allow add a player class that holds player data. 
+
