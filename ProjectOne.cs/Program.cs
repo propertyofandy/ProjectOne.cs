@@ -55,8 +55,10 @@ namespace ProjectOne.cs
                 }
                 else if (answer.ToLower() == "yes")
                 {
+                    string hidden = randomWord[n];
                     // sends data to PlayGame method in Game 
-                    Game.PlayGame(lives, randomWord[n]);
+                    Game game1 = new Game(lives, hidden);
+                    Game.PlayGame(game1);
 
                 }
                 

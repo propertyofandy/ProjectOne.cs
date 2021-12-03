@@ -10,17 +10,18 @@ namespace ProjectOne.cs
     {
         public int lives;
         public string hidden;
-        
+
         public Game(int lives, string hidden)
         {
             lives = this.lives;
             hidden = this.hidden;
-           
+
         }
 
-        public static bool PlayGame( int lives, string hidden)
+        public static Game PlayGame( Game g)
         {
-            lives = 3; 
+            string hidden = g.hidden;
+            int lives = g.lives;
             int numGeuss = 0;
             string[] secret = new string[hidden.Length];
             
