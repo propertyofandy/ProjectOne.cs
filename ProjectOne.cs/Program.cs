@@ -44,7 +44,7 @@ namespace ProjectOne.cs
             while (runGame == true)
             {
                 int n = random.Next(j-1); // uses amount of words gathered to determine next random
-                Console.WriteLine(n);
+
                 // console output/input for playing game
                 Console.WriteLine("\t\twould you like to play a game \n\t\tyes or no:\t");
                 string answer = Console.ReadLine();
@@ -57,8 +57,9 @@ namespace ProjectOne.cs
                 {
                     string hidden = randomWord[n];
                     // sends data to PlayGame method in Game 
-                    Game game1 = new Game(lives, hidden);
-                    Game.PlayGame(game1);
+                    Game g = new Game();
+                   
+                    g.PlayGame(3, hidden);
 
                 }
                 

@@ -11,6 +11,13 @@ namespace ProjectOne.cs
         public int lives;
         public string hidden;
 
+        public Game()
+        {
+            lives = 3;
+            hidden = "hello";
+
+        }
+
         public Game(int lives, string hidden)
         {
             lives = this.lives;
@@ -18,36 +25,36 @@ namespace ProjectOne.cs
 
         }
 
-        public static Game PlayGame( Game g)
+        public void PlayGame( int lives, string hidden)
         {
-            string hidden = g.hidden;
-            int lives = g.lives;
-            int numGeuss = 0;
-            string[] secret = new string[hidden.Length];
+            int numGeuss = 0; // number of guesses will use later
+            string[] secret = new string[hidden.Length]; // creating array with elements = length of hidden
             
             bool gameWon = false;
-            LetterSpots(hidden, secret, numGeuss);
+            LetterSpots(hidden, secret, numGeuss);// places _ or corect guess in array
             GettingStarted();
-            while (gameWon == false)
+            while (gameWon == false) // play game while false
             {
+                // creates string from secret[] will be used later to check lives
                 string lifeCheck = "";
                 for (int i = 0; i < hidden.Length; i++)
                 {
                     lifeCheck = lifeCheck + secret[i];
                 }
-                string lifeCheck2 = lifeCheck;
+                string lifeCheck2 = lifeCheck; // we now assign the values to lifecheck2
                 numGeuss = 1;
                 
-                secret = GuessChecker(hidden, secret);
+                secret = GuessChecker(hidden, secret); 
                 LetterSpots(hidden, secret, numGeuss);
 
+                // we now set lifecheck = secret[i]
                 lifeCheck = "";
                 for (int i = 0; i < hidden.Length; i++)
                 {
                     lifeCheck = lifeCheck + secret[i];
                 }
 
-                if(lifeCheck == lifeCheck2)
+                if(lifeCheck == lifeCheck2) // if both values are the same then you lost a life
                 {
                     lives--;
                     Console.WriteLine($"you have {lives} remaining");
@@ -59,19 +66,19 @@ namespace ProjectOne.cs
                     gameWon = true;
                 }
 
-                if(lives == 0)
+                if(lives == 0) // check if you lost 
                 {
                     Console.WriteLine("game over the word was " + hidden);
                     gameWon = true;
                 }
                 numGeuss++;
             }
-            if (lives != 0)
+            if (lives != 0) // check if you won
             {
                 Console.WriteLine("you won");
             }
 
-            return true; 
+         
 
 
         }
