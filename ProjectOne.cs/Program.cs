@@ -33,7 +33,7 @@ namespace ProjectOne.cs
 
             // inputing each word from text file into array 
             StreamReader reading = new StreamReader("file1.txt");
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < j; i++)
             {
                 randomWord[i] = reading.ReadLine(); 
             }
@@ -43,7 +43,7 @@ namespace ProjectOne.cs
             
             while (runGame == true)
             {
-                int n = random.Next(j-1); // uses amount of words gathered to determine next random
+                int n = random.Next(j); // uses amount of words gathered to determine next random
 
                 // console output/input for playing game
                 Console.WriteLine("\t\twould you like to play a game \n\t\tyes or no:\t");
