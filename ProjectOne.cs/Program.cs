@@ -57,9 +57,9 @@ namespace ProjectOne.cs
                 {
                     string hidden = randomWord[n];
                     // sends data to PlayGame method in Game 
-                    Game g = new Game();
+                    Game g = new Game(3, hidden);
                    
-                    g.PlayGame(3, hidden);
+                    g.PlayGame(g);
 
                 }
                 

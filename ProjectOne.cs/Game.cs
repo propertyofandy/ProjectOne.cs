@@ -20,12 +20,12 @@ namespace ProjectOne.cs
 
         public Game(int lives, string hidden)
         {
-            lives = this.lives;
-            hidden = this.hidden;
+            this.lives = lives;
+            this.hidden = hidden;
 
         }
 
-        public void PlayGame( int lives, string hidden)
+        public void PlayGame( Game g)
         {
             int numGeuss = 0; // number of guesses will use later
             string[] secret = new string[hidden.Length]; // creating array with elements = length of hidden
